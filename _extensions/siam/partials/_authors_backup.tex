@@ -1,0 +1,49 @@
+$it.name.literal$$if(it.orcid)$~\orcidlink{$it.orcid$}$endif$%
+\thanks{
+hi
+$for(it.affiliations)$
+  $for(it/pairs)$
+  $it.key$. $it.value$
+  $endfor$
+$endfor$
+$for(it.affiliations)$
+  $if(it.name)$
+    $it.name$%
+    $if(it.city)$
+      $if(it.state)$
+      ,
+      $else$
+      ,
+      $endif$
+    $else$
+      $if(it.state)$
+      ,
+      $else$
+
+      $endif$
+    $endif$
+  $endif$
+  $if(it.city)$
+    $it.city$%
+    $if(it.state)$
+      ,
+    $else$
+    \ %
+    $endif$
+  $endif$
+  $if(it.state)$
+    $it.state$%
+  $endif$
+  $if(it.postal-code)$
+    \ $it.postal-code$%
+  $endif$
+$endfor$
+$if(it.email)$
+$if(it.url)$
+  (\email{$it.email$}, \url{$it.url$})%
+$else$
+  (\email{$it.email$})%
+$endif$
+$else$
+  (\url{$it.url$})%
+$endif$}

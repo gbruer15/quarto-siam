@@ -1,0 +1,28 @@
+title: SIAM
+author: Grant Bruer
+version: 1.0.0
+quarto-required: ">=1.6.0"
+contributes:
+  formats:
+    common:
+      toc: true
+      filters:
+        - siam.lua
+    pdf:
+      include-in-header: header.tex
+      template-partials:
+        - partials/before-body.tex
+        - partials/title.tex
+        - partials/_authors.tex
+        - partials/_affiliations.tex
+      documentclass: siamart250211
+      classoption: [review,onefignum,onetabnum]
+      number-sections: true
+      pdf-engine: pdflatex
+      format-resources:
+        - siamplain.bst
+        - siamart250211.cls
+
+      colorlinks: true
+      linkcolor: siaminlinkcolor
+      urlcolor: siamexlinkcolor

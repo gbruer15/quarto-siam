@@ -1,0 +1,20 @@
+
+\makeatletter
+\renewcommand\thefootnote{\textsuperscript{\@fnsymbol\c@footnote}}
+\let\old@thanks\thanks% save the normal thanks
+\DeclareRobustCommand\thanks[2][]{% redefine thanks
+  \AddToHook{begindocument/end}{% but postpone the change until it is needed
+    \if\relax#1\relax%
+      \footnotemark%
+    \else%
+      \protect\refstepcounter{footnote}\protect\label{#1}%
+    \fi%
+    \protected@xdef\@thanks{%
+      \@thanks\protect\footnotetext[\the\c@footnote]{#2}%
+    }%
+  }%
+}
+\AddToHook{begindocument/begin}{\let\thanks\old@thanks} % present hyperref with the usual thanks
+\let\old@maketitle\maketitle
+\def\maketitle{\old@maketitle\def\thefootnote{\@arabic\c@footnote}}
+\makeatother

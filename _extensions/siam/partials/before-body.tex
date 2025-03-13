@@ -1,0 +1,27 @@
+$if(has-frontmatter)$
+\frontmatter
+$endif$
+$if(title)$
+$if(beamer)$
+\frame{\titlepage}
+$else$
+\maketitle
+$endif$
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+$if(keywords)$
+\begin{keywords}
+$for(keywords)$$it$${ sep }, $endfor$
+\end{keywords}
+$endif$
+$if(MSCcodes)$
+\begin{MSCcodes}
+$for(MSCcodes)$$it$${ sep }, $endfor$
+\end{MSCcodes}
+$endif$
+$endif$
+
+

@@ -1,0 +1,50 @@
+$for(affiliations)$
+\thanks[$it.id$]{
+  $if(it.name)$
+    $it.name$%
+    $if(it.city)$
+      $if(it.region)$
+      ,
+      $else$
+      ,
+      $endif$
+    $else$
+      $if(it.region)$
+      ,
+      $else$
+
+      $endif$
+    $endif$
+  $endif$
+  $if(it.city)$
+    $it.city$%
+    $if(it.region)$
+      ,
+    $else$
+    \ %
+    $endif$
+  $endif$
+  $if(it.region)$
+    $it.region$%
+  $endif$
+  $if(it.postal-code)$
+    \ $it.postal-code$%
+  $endif$%
+  % TODO: implement this with a filter instead of this mess.
+  $for(authors)$
+    $for(authors.affiliations)$
+      \expandafter\ifstrequal\expandafter{$it.ref$}{$affiliations.id$}{%
+        $if(authors.email)$
+        $if(authors.url)$
+          \ (\email{$authors.email$}, \url{$authors.url$})%
+        $else$
+          \ (\email{$authors.email$})%
+        $endif$
+        $else$
+          \ (\url{$authors.url$})%
+        $endif$
+       }{}%
+    $endfor$
+  $endfor$
+$endfor$
+}

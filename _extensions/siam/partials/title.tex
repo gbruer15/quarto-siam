@@ -1,0 +1,65 @@
+$if(title)$
+\title{$title$$if(thanks)$\ref{title-thanks}$endif$}
+$if(thanks)$\thanks[title-thanks]{$thanks$}$endif$
+$endif$
+$if(subtitle)$
+$if(beamer)$
+$else$
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+$endif$
+\subtitle{$subtitle$}
+$endif$
+${ affiliations:_affiliations.tex() }
+\author{${ authors:_authors.tex()[\and ] }}
+
+% \author{$for(authors)$
+% $sep$\and $endfor$}
+
+\date{$date$}
+$if(beamer)$
+$if(institute)$
+\institute{$for(institute)$$institute$$sep$ \and $endfor$}
+$endif$
+$if(titlegraphic)$
+\titlegraphic{\includegraphics$if(titlegraphicoptions)$[$for(titlegraphicoptions)$$titlegraphicoptions$$sep$, $endfor$]$endif${$titlegraphic$}}$endif$
+$if(logo)$
+\logo{\includegraphics{$logo$}}
+$endif$
+$endif$
+
+
+  %   affiliations:
+  %     - name: Imagination Corp
+  %       city: Chicago
+  %       state: IL
+  %       country: USA
+  %   email: ddoe@imag.com
+  %   url: http://www.imag.com/\string~ddoe/
+  % - name: Paul T. Frank
+  %   affiliations:
+  %     - id: FU_DAM
+  %       name: Fictional University
+  %       department: Department of Applied Mathematics
+  %       address: 1 Main St
+  %       city: Boise
+  %       state: ID
+  %       country: USA
+  %   email: ptfrank@fictional.edu
+  % - name: Jane E. Smith
+  %   affiliations:
+  %     - ref: FU_DAM
+  %   email: jesmith@fictional.edu
+% % Sets running headers as well as PDF title and authors
+% \headers{An Example Article}{D. Doe, P. T. Frank, and J. E. Smith}
+
+% % Authors: full names plus addresses.
+% \author{Dianne Doe\thanks{Imagination Corp., Chicago, IL 
+%   (\email{ddoe@imag.com}, \url{http://www.imag.com/\string~ddoe/}).}
+% \and Paul T. Frank\thanks{Department of Applied Mathematics, Fictional University, Boise, ID 
+%   (\email{ptfrank@fictional.edu}, \email{jesmith@fictional.edu}).}
+% \and Jane E. Smith\footnotemark[3]}
