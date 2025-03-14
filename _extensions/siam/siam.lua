@@ -13,7 +13,7 @@ function has_class(el, class)
 end
 
 function Meta(meta)
-  for _i, v in ipairs(meta.bibliography) do
+  for i, v in ipairs(meta.bibliography) do
     if bibname ~= '' then
       bibname = bibname .. ','
     end
@@ -26,33 +26,24 @@ function Pandoc(doc)
     return doc
   end
 
-  -- local bibname = "sample-base"
-
-
   local first_appendix = -1
   for i, el in ipairs(doc.blocks) do
-    if el.t == "Header" and pandoc.utils.stringify(el.content) == "References" then      
+    if el.t == "Header" and pandoc.utils.stringify(el.content) == "References" then
       -- add bibliography to the right place
       local bibliography = pandoc.RawBlock(
         "latex", 
-        "\\bibliographystyle{siamplain}\n\\bibliography{" .. bibname .. "}")
+        "\\bibliographystyle{siamplain}\n\\bibliography{" .. bibname .. "}"
+      )
       doc.blocks[i] = bibliography
-      print('here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    elseif el.t == "Div" and el.attr and el.attr.identifier == "refs" then
+      doc.blocks[i] = pandoc.RawBlock("latex", "")
     elseif el.t == "Header" and has_class(el, "appendix") then
       -- fix appendix compilation
       if first_appendix == -1 then
         first_appendix = i
       end
-      print('here?????????????????????????????????????????????????')
       -- doc.blocks[i] = appendix
     end
-    -- elseif el.t == "Div" and has_class(el, "acks") then
-    --   -- fix acknowledgments
-    --   local text = pandoc.write(pandoc.Pandoc(el.content), "latex")
-    --   local node = pandoc.RawBlock(
-    --     "latex", "\\begin{acks}\n" .. text .. "\n\\end{acks}")
-    --   doc.blocks[i] = node        
-    -- end
   end
   if first_appendix ~= -1 then
     local appendix = pandoc.RawBlock("latex", "\\appendix")

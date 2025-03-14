@@ -1,9 +1,9 @@
 ---
 title: An Example Article
 format:
-  siam-pdf:
-    keep-tex: true  
+  siam-pdf: default
   siam-html: default
+
 author:
   - name: Dianne Doe
     affiliations:
@@ -33,16 +33,11 @@ abstract: |
   equations, etc.  An abstract must consist of a single paragraph and
   be concise. Because of online formatting, abstracts must appear as
   plain as possible. Any equations should be inline.
-keywords: [example, \LaTeX]
+keywords: [example, LaTeX]
 MSCcodes: [68Q25, 68R10, 68U05]
-bibliography: references.bib
 thanks: |
   Submitted to the editors DATE.
   \funding{This work was funded by the Fog Research Institute under contract no.~FRI-454.}
-include-in-header:
-  text: |
-    \usepackage{amsopn}
-    \DeclareMathOperator{\diag}{diag}
 crossref:
   custom:
     - key: siamthm
@@ -64,7 +59,12 @@ filters:
   - pseudocode
 ---
 
+::: {.hidden}
 
+\usepackage{amsopn}
+\DeclareMathOperator{\diag}{diag}
+
+:::
 
 <!-- 
 \ifpdf
@@ -208,7 +208,7 @@ C=\begin{pmatrix}1&1&0\\1&1&0\\0&0&0\end{pmatrix}.
 $$ {#eq-matrices}
 Equation @eq-matrices shows some example matrices.
 
-We calculate the Fr\'{e}chet derivative of $F$ as follows:
+We calculate the Fréchet derivative of $F$ as follows:
 
 \begin{subequations}
 \begin{align}
@@ -235,7 +235,6 @@ Our analysis leads to the algorithm in @alg-buildtree.
 
 \begin{algorithm}
 \caption{Build tree}
-\label{alg:buildtree}
 \begin{algorithmic}
 \State{Define $P:=T:=\{ \{1\},\ldots,\{d\}$\}}
 \While{$\#P > 1$}
@@ -243,7 +242,7 @@ Our analysis leads to the algorithm in @alg-buildtree.
 \State{Find an optimal partition tree $T_{C^\prime}$ }
 \State{Update $P := (P{\setminus} C^\prime) \cup \{ \bigcup_{t\in C^\prime} t \}$}
 \State{Update $T := T \cup \{ \bigcup_{t\in\tau} t : \tau\in T_{C^\prime}{\setminus} \mathcal{L}(T_{C^\prime})\}$}
-\EndWhile\\
+\EndWhile
 \Return $T$
 \end{algorithmic}
 \end{algorithm}
@@ -260,9 +259,9 @@ available in the supplement in @tbl-foo.
 
 ::: {#fig-testfig}
 
-![](figs/lexample_fig1.eps){#fig-a}
+![](figs/lexample_fig1){#fig-a}
 
-An Elephant
+Example figure using external image files.
 :::
 
 @tbl-foo shows additional
@@ -280,21 +279,20 @@ supporting evidence.
 
 {{< lipsum 51-51 >}}
 
-# Discussion of **$Z=X \cup Y$** {#sec-experiments}
+
+# Discussion of **$Z=X \cup Y$**
 
 {{< lipsum 76-76 >}}
+
 
 # Conclusions {#sec-conclusions}
 
 Some conclusions here.
 
-# References
 
-::: {#refs}
-:::
+# An example appendix {.appendix}
 
-
-# An example appendix {#sec-example-appendix .appendix}
+This is the example appendix.
 
 {{< lipsum 71-71 >}}
 
@@ -308,7 +306,13 @@ Test Lemma.
 
 :::
 
-
-# Acknowledgments {#sec-acknowledgements .unnumbered}
+# Acknowledgments {.unnumbered}
 We would like to acknowledge the assistance of volunteers in putting
 together this example manuscript and supplement.
+
+
+# References
+
+::: {#refs}
+:::
+

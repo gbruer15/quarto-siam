@@ -1,0 +1,23 @@
+/*-- scss:uses --*/
+/*-- scss:functions --*/
+/*-- scss:defaults --*/
+/*-- scss:rules --*/
+
+#quarto-document-content {
+  counter-reset: appendix;
+  .appendix {
+    h1 {
+      // Set headers in appendix to use a separate numbering system.
+      counter-increment: appendix;
+      .header-section-number {
+        visibility: hidden;
+        font-size: 0px;
+        &:before {
+          content: 'Appendix ' counter(appendix, upper-alpha);
+          visibility: visible;
+          font-size: $h1-font-size;
+        }
+      }
+    }
+  }
+}

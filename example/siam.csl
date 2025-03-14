@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" default-locale="en-US">
+  <info>
+    <link href="http://www.zotero.org/styles/ieee" rel="independent-parent"/>
+    <category citation-format="numeric"/>
+    <category field="engineering"/>
+  </info>
+</style>
